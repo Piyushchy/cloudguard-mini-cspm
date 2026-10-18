@@ -1,0 +1,25 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "ReportsBucketListAndGet",
+      "Effect": "Allow",
+      "Action": [
+        "s3:ListBucket",
+        "s3:GetObject"
+      ],
+      "Resource": [
+        "arn:aws:s3:::cspm-demo-reports-310788607340",
+        "arn:aws:s3:::cspm-demo-reports-310788607340/*"
+      ]
+    },
+    {
+      "Sid": "ScansPutObjectOnly",
+      "Effect": "Allow",
+      "Action": [
+        "s3:PutObject"
+      ],
+      "Resource": "arn:aws:s3:::cspm-demo-reports-310788607340/scans/*"
+    }
+  ]
+}
