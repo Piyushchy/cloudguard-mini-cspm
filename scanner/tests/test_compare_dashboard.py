@@ -53,6 +53,7 @@ def test_dashboard_renders_without_errors():
 
     at = AppTest.from_file(str(ROOT / "scanner" / "dashboard" / "app.py"), default_timeout=60)
     at.run()
+    at.sidebar.text_input[0].set_value(str(SAMPLES)).run()   # force the sample data, ignore results/
     assert not at.exception, at.exception
     metrics = {m.label: m.value for m in at.metric}
     assert metrics["Posture score"] == "89%"

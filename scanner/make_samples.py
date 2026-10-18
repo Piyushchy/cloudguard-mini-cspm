@@ -67,8 +67,8 @@ def build_findings(*, fixed: bool) -> list[dict]:
         F("IAM-002", VULN_USER, user_arn(VULN_USER), X,
           "User has a console password but no MFA device registered."),
         # CT-001
-        F("CT-001", TRAIL, trail_arn(TRAIL), P,
-          "Trail is multi-region and logging is on."),
+        F("CT-001", ACCOUNT, trail_arn(TRAIL), P,
+          "Trail cspm-demo-trail is multi-region and logging is on."),
     ]
 
 

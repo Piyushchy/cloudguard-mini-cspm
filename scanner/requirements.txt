@@ -1,7 +1,7 @@
 boto3
 jsonschema
-streamlit
+streamlit>=1.50
 pandas
 plotly
 pytest
-moto
+moto[s3,ec2,iam,cloudtrail,sts]

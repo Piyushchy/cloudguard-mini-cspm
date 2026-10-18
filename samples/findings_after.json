@@ -17,15 +17,15 @@
   },
   "findings": [
     {
-      "id": "CT-001#cspm-demo-trail",
+      "id": "CT-001#123456789012",
       "check_id": "CT-001",
       "title": "No active multi-region CloudTrail trail",
       "service": "cloudtrail",
-      "resource_id": "cspm-demo-trail",
+      "resource_id": "123456789012",
       "resource_arn": "arn:aws:cloudtrail:ap-south-1:123456789012:trail/cspm-demo-trail",
       "severity": "MEDIUM",
       "status": "PASS",
-      "description": "Trail is multi-region and logging is on.",
+      "description": "Trail cspm-demo-trail is multi-region and logging is on.",
       "remediation_hint": "Create a multi-region CloudTrail trail and make sure logging is turned on.",
       "auto_remediable": false,
       "remediation_action": "NONE"

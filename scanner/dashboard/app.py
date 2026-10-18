@@ -168,7 +168,7 @@ with tab1:
     s = scans[sid]
     left, right = st.columns([1, 1])
     with left:
-        st.plotly_chart(gauge(s["summary"]["score"], "Posture score"), use_container_width=True)
+        st.plotly_chart(gauge(s["summary"]["score"], "Posture score"), width="stretch")
     with right:
         sev = s["summary"]["by_severity"]
         fig = go.Figure(go.Bar(
@@ -177,7 +177,7 @@ with tab1:
             textposition="outside"))
         fig.update_layout(title="Failed findings by severity", height=320,
                           margin=dict(l=20, r=20, t=60, b=10), yaxis=dict(dtick=1, rangemode="tozero"))
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width="stretch")
 
     df = findings_df(s)
     c1, c2, c3 = st.columns(3)
@@ -185,7 +185,7 @@ with tab1:
     f_sev = c2.multiselect("Severity", SEV_ORDER, default=SEV_ORDER)
     f_svc = c3.multiselect("Service", sorted(df["Service"].unique()), default=sorted(df["Service"].unique()))
     view = df[df["Status"].isin(f_status) & df["Severity"].isin(f_sev) & df["Service"].isin(f_svc)]
-    st.dataframe(view.style.apply(color_status, axis=1), use_container_width=True, hide_index=True)
+    st.dataframe(view.style.apply(color_status, axis=1), width="stretch", hide_index=True)
     st.caption(f"Showing {len(view)} of {len(df)} findings - account {s['account_id']} - {s['region']}")
 
 # ---- Tab 2: before/after
@@ -201,11 +201,11 @@ with tab2:
         c = compare(scans[b_id], scans[a_id], logs.get(b_id))
 
         g1, g2, g3 = st.columns([2, 1, 2])
-        g1.plotly_chart(gauge(c["score_before"], "Before"), use_container_width=True)
+        g1.plotly_chart(gauge(c["score_before"], "Before"), width="stretch")
         g2.markdown("<br><br>", unsafe_allow_html=True)
         g2.metric("Change", f"{c['score_delta']:+d} pts")
         g2.markdown("✅ **SLO met**" if c["meets_slo"] else f"⚠️ **SLO not met** (target {c['slo']}%)")
-        g3.plotly_chart(gauge(c["score_after"], "After"), use_container_width=True)
+        g3.plotly_chart(gauge(c["score_after"], "After"), width="stretch")
 
         fx, so = st.columns(2)
         with fx:
@@ -238,6 +238,6 @@ with tab3:
             "Result": a["result"], "Detail": a["detail"],
             "Before state": json.dumps(a["before_state"]),
         } for a in lg["actions"]]
-        st.dataframe(pd.DataFrame(rows), use_container_width=True, hide_index=True)
+        st.dataframe(pd.DataFrame(rows), width="stretch", hide_index=True)
         ok = sum(a["result"] == "SUCCESS" for a in lg["actions"])
         st.caption(f"{ok} of {len(lg['actions'])} actions succeeded; the rest were skipped or need a human.")
