@@ -11,6 +11,11 @@ It creates a virtual environment, installs the packages, runs the tests, builds 
 *fake* AWS lab (using `moto`), scans it, simulates the fixes, scans again, and opens
 the dashboard at http://localhost:8501.
 
+The hosted dashboard is available at
+https://cloudguard-mini-cspm-v5mqmdzncdp9ftwux6gdci.streamlit.app/.
+It deploys from `p2/scanner`; the root `requirements.txt` lists its runtime
+dependencies for Streamlit Community Cloud.
+
 Or step by step:
 ```
 python -m venv .venv
