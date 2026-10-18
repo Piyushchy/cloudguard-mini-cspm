@@ -1,0 +1,73 @@
+{
+  "scan_id": "20261105T093000Z-before",
+  "mode": "remediate",
+  "started": "2026-11-05T09:30:04Z",
+  "finished": "2026-11-05T09:30:09Z",
+  "actions": [
+    {
+      "finding_id": "S3-001#cspm-demo-vuln-bucket-123456789012",
+      "check_id": "S3-001",
+      "resource_id": "cspm-demo-vuln-bucket-123456789012",
+      "action": "S3_ENABLE_BPA",
+      "result": "SUCCESS",
+      "before_state": {
+        "BlockPublicAcls": false,
+        "IgnorePublicAcls": false,
+        "BlockPublicPolicy": false,
+        "RestrictPublicBuckets": false
+      },
+      "detail": "Enabled all four Block Public Access settings."
+    },
+    {
+      "finding_id": "S3-002#cspm-demo-vuln-bucket-123456789012",
+      "check_id": "S3-002",
+      "resource_id": "cspm-demo-vuln-bucket-123456789012",
+      "action": "S3_ENABLE_VERSIONING",
+      "result": "SUCCESS",
+      "before_state": {
+        "Status": "Disabled"
+      },
+      "detail": "Versioning set to Enabled."
+    },
+    {
+      "finding_id": "EC2-001#sg-0a1b2c3d4e5f60718",
+      "check_id": "EC2-001",
+      "resource_id": "sg-0a1b2c3d4e5f60718",
+      "action": "EC2_REVOKE_OPEN_INGRESS",
+      "result": "SUCCESS",
+      "before_state": {
+        "revoked_rules": [
+          {
+            "IpProtocol": "tcp",
+            "FromPort": 22,
+            "ToPort": 22,
+            "CidrIp": "0.0.0.0/0"
+          }
+        ]
+      },
+      "detail": "Revoked 1 open ingress rule (0.0.0.0/0 on port 22)."
+    },
+    {
+      "finding_id": "IAM-001#cspm-demo-vuln-user",
+      "check_id": "IAM-001",
+      "resource_id": "cspm-demo-vuln-user",
+      "action": "IAM_DETACH_ADMIN_POLICY",
+      "result": "SUCCESS",
+      "before_state": {
+        "attached_policies": [
+          "arn:aws:iam::aws:policy/AdministratorAccess"
+        ]
+      },
+      "detail": "Detached AdministratorAccess from the user."
+    },
+    {
+      "finding_id": "IAM-002#cspm-demo-vuln-user",
+      "check_id": "IAM-002",
+      "resource_id": "cspm-demo-vuln-user",
+      "action": "NONE",
+      "result": "SKIPPED_NOT_AUTOMATABLE",
+      "before_state": {},
+      "detail": "Needs a human: register MFA or remove the console login profile."
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$comment": "DRAFT written by P2 from contract A5. P1 owns this file: replace with P1's version when it exists and re-run the tests.",
+  "title": "CloudGuard scan findings",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["scan_id", "timestamp", "account_id", "region", "label", "summary", "findings"],
+  "properties": {
+    "scan_id": {"type": "string", "pattern": "^[0-9]{8}T[0-9]{6}Z-(before|after|adhoc)$"},
+    "timestamp": {"type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$"},
+    "account_id": {"type": "string", "pattern": "^[0-9]{12}$"},
+    "region": {"type": "string", "minLength": 1},
+    "label": {"enum": ["before", "after", "adhoc"]},
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["score", "total", "failed", "by_severity"],
+      "properties": {
+        "score": {"type": "integer", "minimum": 0, "maximum": 100},
+        "total": {"type": "integer", "minimum": 0},
+        "failed": {"type": "integer", "minimum": 0},
+        "by_severity": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["CRITICAL", "HIGH", "MEDIUM", "LOW"],
+          "properties": {
+            "CRITICAL": {"type": "integer", "minimum": 0},
+            "HIGH": {"type": "integer", "minimum": 0},
+            "MEDIUM": {"type": "integer", "minimum": 0},
+            "LOW": {"type": "integer", "minimum": 0}
+          }
+        }
+      }
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id", "check_id", "title", "service", "resource_id", "resource_arn",
+          "severity", "status", "description", "remediation_hint",
+          "auto_remediable", "remediation_action"
+        ],
+        "properties": {
+          "id": {"type": "string", "pattern": "^[A-Z0-9]+-[0-9]{3}#.+$"},
+          "check_id": {"enum": ["S3-001", "S3-002", "EC2-001", "IAM-001", "IAM-002", "CT-001"]},
+          "title": {"type": "string", "minLength": 1},
+          "service": {"type": "string", "minLength": 1},
+          "resource_id": {"type": "string", "minLength": 1},
+          "resource_arn": {"type": "string", "pattern": "^arn:"},
+          "severity": {"enum": ["CRITICAL", "HIGH", "MEDIUM", "LOW"]},
+          "status": {"enum": ["PASS", "FAIL"]},
+          "description": {"type": "string", "minLength": 1},
+          "remediation_hint": {"type": "string", "minLength": 1},
+          "auto_remediable": {"type": "boolean"},
+          "remediation_action": {
+            "enum": [
+              "S3_ENABLE_BPA", "S3_ENABLE_VERSIONING", "EC2_REVOKE_OPEN_INGRESS",
+              "IAM_DETACH_ADMIN_POLICY", "NONE"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
