@@ -1,0 +1,9 @@
+# P3 Remediation — Development Dependencies
+# Lambda runtime: python3.13 (AWS Lambda GA, Amazon Linux 2023)
+# Local development uses Python 3.14+ (compatible)
+
+boto3>=1.35.0
+botocore>=1.35.0
+pytest>=8.0
+moto[s3,ec2,iam,sns,lambda,logs]>=5.0
+jsonschema>=4.20
