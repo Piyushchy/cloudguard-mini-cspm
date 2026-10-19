@@ -1,0 +1,70 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "CloudWatchLogsAccess",
+      "Effect": "Allow",
+      "Action": [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+      ],
+      "Resource": "arn:aws:logs:ap-south-1:310788607340:log-group:/aws/lambda/cspm-demo-remediator:*"
+    },
+    {
+      "Sid": "S3ReportsBucketAccess",
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetObject"
+      ],
+      "Resource": "arn:aws:s3:::cspm-demo-reports-310788607340/scans/*"
+    },
+    {
+      "Sid": "S3RemediationLogsAccess",
+      "Effect": "Allow",
+      "Action": [
+        "s3:PutObject"
+      ],
+      "Resource": "arn:aws:s3:::cspm-demo-reports-310788607340/remediation-logs/*"
+    },
+    {
+      "Sid": "SNSPublishAlerts",
+      "Effect": "Allow",
+      "Action": [
+        "sns:Publish"
+      ],
+      "Resource": "arn:aws:sns:ap-south-1:310788607340:cspm-demo-alerts"
+    },
+    {
+      "Sid": "S3RemediationActions",
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetBucketTagging",
+        "s3:GetBucketPublicAccessBlock",
+        "s3:PutBucketPublicAccessBlock",
+        "s3:GetBucketVersioning",
+        "s3:PutBucketVersioning"
+      ],
+      "Resource": "arn:aws:s3:::cspm-demo-vuln-bucket-310788607340"
+    },
+    {
+      "Sid": "EC2RemediationActions",
+      "Effect": "Allow",
+      "Action": [
+        "ec2:DescribeSecurityGroups",
+        "ec2:RevokeSecurityGroupIngress"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "IAMRemediationActions",
+      "Effect": "Allow",
+      "Action": [
+        "iam:ListUserTags",
+        "iam:ListAttachedUserPolicies",
+        "iam:DetachUserPolicy"
+      ],
+      "Resource": "arn:aws:iam::310788607340:user/cspm-demo-vuln-user"
+    }
+  ]
+}
