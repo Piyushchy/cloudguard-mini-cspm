@@ -60,6 +60,8 @@ pip install -r remediation/requirements-dev.txt
 # Dry-run package build verification
 .venv\Scripts\python remediation/deploy.py --help
 
-# Rollback CLI verification
-.venv\Scripts\python remediation/rollback.py --help
+# Push P3 branch to GitHub remote repository
+git push -u origin p3/remediation
+# → https://github.com/Piyushchy/cloudguard-mini-cspm/pull/new/p3/remediation
 ```
+
